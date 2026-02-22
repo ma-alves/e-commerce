@@ -1,20 +1,12 @@
 import { DataTypes, Model } from "sequelize";
 import type { Optional } from "sequelize";
 import { sequelize } from "../config/db.js";
+import type { UserInterface } from "./user.types.js";
 
-interface UserAttributes {
-  uuid: string;
-  name: string;
-  email: string;
-  password: string;
-  role: "User" | "Admin";
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+// exclusivo daqui, utiliza optional do sequelize
+export type CreateUserInterface = Optional<UserInterface, "uuid" | "createdAt" | "updatedAt" | "role">
 
-interface UserCreationAttributes extends Optional<UserAttributes, "uuid"> {}
-
-class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+class User extends Model<UserInterface, CreateUserInterface> implements UserInterface {
   declare uuid: string;
   declare name: string;
   declare email: string;
