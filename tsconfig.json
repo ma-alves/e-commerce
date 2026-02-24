@@ -19,6 +19,7 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
+    "emitDeclarationOnly": true,
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
@@ -40,6 +41,10 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": [
     "./src/**/*",

@@ -1,36 +1,22 @@
-import { User } from "./user.model.js";
-import type { CreateUserInput, UpdateUserInput } from "./user.types.js"
-import { hashPassword } from "./auth.js";
-
-// interface CreateUserDTO {
-//   name: string;
-//   email: string;
-//   password: string;
-//   role?: "User" | "Admin";
-// }
-
-// interface UpdateUserDTO {
-//   name?: string;
-//   email?: string;
-//   password?: string;
-//   role?: "User" | "Admin";
-// }
+import { User } from "./user.model.ts";
+import type { CreateUserInput, UpdateUserInput } from "./user.types.ts";
+import { hashPassword } from "./auth.utils.ts";
 
 export class UserService {
-  async create(data: CreateUserInput): Promise<User> {
-    const existing = await User.findOne({ where: { email: data.email } });
+  // async create(data: CreateUserInput): Promise<User> {
+  //   const existing = await User.findOne({ where: { email: data.email } });
 
-    if (existing) {
-      throw new Error("Email already in use");
-    }
+  //   if (existing) {
+  //     throw new Error("Email already in use");
+  //   }
 
-    const hashedPassword = await hashPassword(data.password);
+  //   const hashedPassword = await hashPassword(data.password);
 
-    return User.create({
-      ...data,
-      password: hashedPassword,
-    });
-  }
+  //   return User.create({
+  //     ...data,
+  //     password: hashedPassword,
+  //   });
+  // }
 
   async findAll(): Promise<User[]> {
     return User.findAll({

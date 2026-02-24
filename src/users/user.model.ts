@@ -1,9 +1,9 @@
 import { DataTypes, Model } from "sequelize";
 import type { Optional } from "sequelize";
-import { sequelize } from "../config/db.js";
-import type { UserInterface } from "./user.types.js";
+import { sequelize } from "../config/db.ts";
+import type { UserInterface } from "./user.types.ts";
 
-// exclusivo daqui, utiliza optional do sequelize
+// exclusivo daqui, utiliza Optional do sequelize
 export type CreateUserInterface = Optional<UserInterface, "uuid" | "createdAt" | "updatedAt" | "role">
 
 class User extends Model<UserInterface, CreateUserInterface> implements UserInterface {
