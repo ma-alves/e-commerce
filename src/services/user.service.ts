@@ -1,6 +1,6 @@
-import { User } from "./user.model.ts";
-import type { CreateUserInput, UpdateUserInput } from "./user.types.ts";
-import { hashPassword } from "./auth.utils.ts";
+import { User } from "../models/user.model.ts";
+import type { CreateUserInput, UpdateUserInput } from "../validation/types.ts";
+import { hashPassword } from "../utils/auth.utils.ts";
 
 export class UserService {
   // async create(data: CreateUserInput): Promise<User> {

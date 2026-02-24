@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { createUserSchema, loginUserSchema, updateUserSchema } from "./schemas.ts";
+import type { createUserSchema, loginUserSchema, updateUserSchema } from "../schemas.ts";
 
 export interface UserInterface {
   uuid: string;

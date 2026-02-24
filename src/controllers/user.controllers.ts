@@ -1,19 +1,10 @@
 // repetições de erro
 
 import type { Request, Response } from "express";
-import { UserService } from "./user.service.ts";
+import { UserService } from "../services/user.service.ts";
+import { getErrorMessage } from "../utils/http-error.ts";
 
 const userService = new UserService();
-
-// export const createUserController = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const user = await userService.create(req.body);
-//     res.status(201).json(user);
-//   } catch (error) {
-//     const message = error instanceof Error ? error.message : "Unexpected error";
-//     res.status(400).json({ message });
-//   }
-// };
 
 export const getUsersController = async (req: Request, res: Response): Promise<void> => {
   try {

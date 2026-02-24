@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import type { Optional } from "sequelize";
 import { sequelize } from "../config/db.ts";
-import type { UserInterface } from "./user.types.ts";
+import type { UserInterface } from "../validation/types.ts";
 
 // exclusivo daqui, utiliza Optional do sequelize
 export type CreateUserInterface = Optional<UserInterface, "uuid" | "createdAt" | "updatedAt" | "role">

@@ -1,6 +1,6 @@
-import { User } from "./user.model.ts";
-import { authenticate, generateToken, hashPassword } from "./auth.utils.ts";
-import type { CreateUserInput, LoginUserInput } from "./user.types.ts";
+import { User } from "../models/user.model.ts";
+import { authenticate, generateToken, hashPassword } from "../utils/auth.utils.ts";
+import type { CreateUserInput, LoginUserInput } from "../validation/types.ts";
 
 // substituir por zod
 interface AuthResponse {
