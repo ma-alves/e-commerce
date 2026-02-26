@@ -5,19 +5,19 @@ import userRouter from "./routes/user.route.ts";
 import authRouter from "./routes/auth.route.ts";
 import { connectDB, syncDatabase } from "./config/db.ts";
 
-// adicionar cors e helmet, !rate-limiter
+// adicionar cors e !rate-limiter
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(helmet({ contentSecurityPolicy: false }));
+app.use(helmet({ contentSecurityPolicy: false })); // impede aquele Cannot GET
 
-app.use("/v1/auth", authRouter);
-app.use("/v1/users", userRouter);
+app.use("api/v1/auth", authRouter);
+app.use("api/v1/users", userRouter);
 
-app.get("/v1", (req: Request, res: Response) => {
+app.get("api/v1", (req: Request, res: Response) => {
   res.json({ message: "welcome to the e-commerce server!" });
 });
 

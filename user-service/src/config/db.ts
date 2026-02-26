@@ -14,7 +14,7 @@ export const sequelize = new Sequelize(
       maxPreparedStatements: 100,
       connectTimeout: 5000
     },
-    logging: true,
+    // logging: true,
   }
 );
 
