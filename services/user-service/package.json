@@ -1,5 +1,5 @@
 {
-  "name": "e-commerce",
+  "name": "@e-commerce/user-service",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
@@ -18,13 +18,12 @@
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
-    "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.18.0",
     "sequelize": "^6.37.7",
-    "stripe": "^20.3.1",
-    "zod": "^4.3.6"
-  }
+    "stripe": "^20.3.1"
+  },
+  "keywords": []
 }

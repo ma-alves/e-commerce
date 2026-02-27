@@ -1,0 +1,32 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "Monorepo onde estou praticando conceitos mais avançados e experimentando ferramentas e padrões novos.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ma-alves/e-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ma-alves/e-commerce/issues"
+  },
+  "homepage": "https://github.com/ma-alves/e-commerce#readme",
+  "workspaces": [
+    "packages/common",
+    "services/user-service"
+  ],
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "zod": "^4.3.6"
+  }
+}

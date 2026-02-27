@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { User } from "../models/user.model.ts";
+import { env } from "@e-commerce/common/src/env.ts"
 
-const secretKey = process.env.SECRET_KEY as string;
+const secretKey = env.JWT_SECRET_KEY as string;
 
-if (!process.env.SECRET_KEY) throw new Error("SECRET_KEY is not defined");
+if (!env.JWT_SECRET_KEY) throw new Error("JWT_SECRET_KEY is not defined");
 
 interface UserPayload {
   uuid: string | number;

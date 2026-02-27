@@ -1,12 +1,10 @@
 import { Sequelize } from "sequelize";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { env } from "@e-commerce/common/src/env.ts"
 
 export const sequelize = new Sequelize(
-  process.env.DATABASE_NAME || "usersdb",
-  process.env.DATABASE_USER || "postgres",
-  process.env.DATABASE_PASSWORD || "postgres",
+  env.DATABASE_NAME || "usersdb",
+  env.DATABASE_USER || "postgres",
+  env.DATABASE_PASSWORD || "postgres",
   {
     host: process.env.DATABASE_HOST || "localhost",
     dialect: "postgres",
