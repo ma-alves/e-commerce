@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import { env } from "@e-commerce/common/src/env.ts"
+import { userLogger } from "@e-commerce/common/src/logger.ts"
 
 export const sequelize = new Sequelize(
   env.DATABASE_NAME || "usersdb",
@@ -21,18 +22,18 @@ export const connectDB = async (retries = 5, delay = 2000) => {
   while (attempts < retries) {
     try {
       await sequelize.authenticate();
-      console.log('Conectado com sucesso');
+      userLogger.info('Conectado com sucesso');
       return;
     } catch (err) {
       const error = err as Error;
       attempts++;
-      console.error(`Erro ao conectar (tentativa ${attempts}/${retries}): ${error.message}`);
+      userLogger.error(`Erro ao conectar (tentativa ${attempts}/${retries}): ${error.message}`);
       if (attempts < retries) {
-        console.log(`Tentando em ${delay / 1000} segundos...`);
+        userLogger.info(`Tentando em ${delay / 1000} segundos...`);
         await new Promise(res => setTimeout(res, delay));
       } else {
         if (process.env.NODE_ENV !== 'production') {
-          console.error(err);
+          userLogger.error(err);
         }
         process.exit(1);
       }
@@ -43,8 +44,8 @@ export const connectDB = async (retries = 5, delay = 2000) => {
 export const syncDatabase = async () => {
   try {
     await sequelize.sync({ force: false });
-    console.log("All tables created or already exist");
+    userLogger.info("All tables created or already exist");
   } catch (err) {
-    console.error(`Error syncing models: ${err}`);
+    userLogger.error(`Error syncing models: ${err}`);
   }
 };

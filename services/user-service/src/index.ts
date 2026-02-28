@@ -4,11 +4,13 @@ import helmet from "helmet";
 import userRouter from "./routes/user.route.ts";
 import authRouter from "./routes/auth.route.ts";
 import { connectDB, syncDatabase } from "./config/db.ts";
+import { userLogger } from "@e-commerce/common/src/logger.ts"
+import { env } from "@e-commerce/common/src/env.ts"
 
 // adicionar cors e !rate-limiter
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,5 +27,5 @@ await connectDB();
 await syncDatabase();
 
 app.listen(port, async () => {
-  console.log(`The server is running at http://localhost:${port}`);
+  userLogger.info(`The server is running at http://localhost:${port}`);
 });
