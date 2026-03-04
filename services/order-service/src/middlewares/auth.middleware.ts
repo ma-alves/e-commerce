@@ -1,9 +1,13 @@
 import jwt from "jsonwebtoken";
 import type { Request, Response, NextFunction } from "express";
-import { User } from "../models/user.model.ts";
 import { env } from "@e-commerce/common/src/env.ts";
 
 interface JwtPayload {
+  uuid: string;
+  role: string;
+}
+
+interface AuthUser {
   uuid: string;
   role: string;
 }
@@ -12,7 +16,7 @@ interface JwtPayload {
 declare global {
   namespace Express {
     interface Request {
-      user?: User;
+      user?: AuthUser;
     }
   }
 }
@@ -37,14 +41,10 @@ export const authenticated = async (
 
   try {
     const decoded = jwt.verify(token, env.JWT_SECRET_KEY as string) as unknown as JwtPayload;
-    const foundUser = await User.findByPk(decoded.uuid);
 
-    if (!foundUser) {
-      res.status(401).json({ message: "User not found" });
-      return;
-    }
-    req.user = foundUser;
-  
+    // Armazenaremos o uuid e role do usuário autenticado
+    // Se precisar dos dados completos do user, fazer uma chamada ao user-service
+    req.user = { uuid: decoded.uuid, role: decoded.role };
   } catch (error) {
     res.status(401).json({ message: `${error}` });
     return;

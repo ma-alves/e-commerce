@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { AuthService } from "../services/auth.service.ts";
-import { getErrorMessage } from "../utils/http-error.ts";
+import { getErrorMessage } from "@e-commerce/common/src/http-error.ts";
 
 const authService = new AuthService();
 

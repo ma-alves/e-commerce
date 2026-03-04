@@ -10,16 +10,16 @@ import { env } from "@e-commerce/common/src/env.ts"
 // adicionar cors e !rate-limiter
 
 const app = express();
-const port = env.PORT;
+const port = env.USER_SERVICE_PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet({ contentSecurityPolicy: false })); // impede aquele Cannot GET
 
-app.use("api/v1/auth", authRouter);
-app.use("api/v1/users", userRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
 
-app.get("api/v1", (req: Request, res: Response) => {
+app.get("/api/v1", (req: Request, res: Response) => {
   res.json({ message: "welcome to the e-commerce server!" });
 });
 

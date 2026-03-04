@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { minLength, z } from "zod";
+import { z } from "zod";
 import type { ZodObject, ZodRawShape } from "zod";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -44,7 +44,8 @@ const envSchema = z.object({
   DATABASE_PASSWORD: z.string(),
   DATABASE_HOST: z.string(),
   JWT_SECRET_KEY: z.string().min(32),
-  PORT: z.coerce.number().int().min(0).max(65_535).default(3000),
+  USER_SERVICE_PORT: z.coerce.number().int().min(0).max(65_535).default(3000),
+  ORDER_SERVICE_PORT: z.coerce.number().int().min(0).max(65_535).default(3001),
   // NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   // USER_SERVICE_PORT: z.coerce.number().int().min(0).max(65_535).default(4001),
   // USER_DB_URL: z.string(),

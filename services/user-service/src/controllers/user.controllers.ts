@@ -2,7 +2,7 @@
 
 import type { Request, Response } from "express";
 import { UserService } from "../services/user.service.ts";
-import { getErrorMessage } from "../utils/http-error.ts";
+import { getErrorMessage } from "@e-commerce/common/src/http-error.ts";
 
 const userService = new UserService();
 
@@ -11,8 +11,7 @@ export const getUsersController = async (req: Request, res: Response): Promise<v
     const users = await userService.findAll();
     res.status(200).json(users);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unexpected error";
-    res.status(500).json({ message });
+    res.status(500).json({ message: getErrorMessage(error) });
   }
 };
 
@@ -21,8 +20,7 @@ export const getUserByIdController = async (req: Request, res: Response): Promis
     const user = await userService.findById(req.params.uuid as string);
     res.status(200).json(user);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unexpected error";
-    res.status(404).json({ message });
+    res.status(404).json({ message: getErrorMessage(error) });
   }
 };
 
@@ -31,8 +29,7 @@ export const updateUserController = async (req: Request, res: Response): Promise
     const user = await userService.update(req.params.uuid as string, req.body);
     res.status(200).json(user);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unexpected error";
-    res.status(400).json({ message });
+    res.status(400).json({ message: getErrorMessage(error) });
   }
 };
 
@@ -41,7 +38,6 @@ export const deleteUserController = async (req: Request, res: Response): Promise
     await userService.delete(req.params.uuid as string);
     res.status(204).send();
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unexpected error";
-    res.status(404).json({ message });
+    res.status(404).json({ message: getErrorMessage(error) });
   }
 };

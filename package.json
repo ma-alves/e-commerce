@@ -20,7 +20,8 @@
   "homepage": "https://github.com/ma-alves/e-commerce#readme",
   "workspaces": [
     "packages/common",
-    "services/user-service"
+    "services/user-service",
+    "services/order-service"
   ],
   "devDependencies": {
     "typescript": "^5.9.3"
