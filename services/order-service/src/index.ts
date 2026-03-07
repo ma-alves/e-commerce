@@ -2,7 +2,7 @@ import express from "express";
 import type { Request, Response } from "express";
 import helmet from "helmet";
 import orderRouter from "./routes/order.route.ts";
-import { connectDB, syncDatabase } from "./config/db.ts";
+import { connectDB, syncDatabase } from "@e-commerce/common/src/db.ts";
 import { orderLogger } from "@e-commerce/common/src/logger.ts"
 import { env } from "@e-commerce/common/src/env.ts"
 
