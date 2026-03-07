@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import type { Optional } from "sequelize";
-import { sequelize } from "../config/db.ts";
+import { sequelize } from "@e-commerce/common/src/db.ts";
 import type { UserInterface } from "../validation/types.ts";
 
 // exclusivo daqui, utiliza Optional do sequelize

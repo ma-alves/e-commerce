@@ -39,9 +39,9 @@ export type EnvSchema<TShape extends ZodRawShape> = ZodObject<TShape>;
 
 // todas variáveis vão passar por aqui
 const envSchema = z.object({
-  DATABASE_NAME: z.string(),
-  DATABASE_USER: z.string(),
-  DATABASE_PASSWORD: z.string(),
+  POSTGRES_DB: z.string(),
+  POSTGRES_USER: z.string(),
+  POSTGRES_PASSWORD: z.string(),
   DATABASE_HOST: z.string(),
   JWT_SECRET_KEY: z.string().min(32),
   USER_SERVICE_PORT: z.coerce.number().int().min(0).max(65_535).default(3000),

@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 import helmet from "helmet";
 import userRouter from "./routes/user.route.ts";
 import authRouter from "./routes/auth.route.ts";
-import { connectDB, syncDatabase } from "./config/db.ts";
+import { connectDB, syncDatabase } from "@e-commerce/common/src/db.ts";
 import { userLogger } from "@e-commerce/common/src/logger.ts"
 import { env } from "@e-commerce/common/src/env.ts"
 

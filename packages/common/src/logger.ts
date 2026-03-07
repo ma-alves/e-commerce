@@ -15,3 +15,4 @@ const logger: Logger = pino({
 
 export const userLogger = logger.child({ module: 'user-service' })
 export const orderLogger = logger.child({ module: 'order-service' })
+export const dbLogger = logger.child({ module: 'database' })

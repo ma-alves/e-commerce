@@ -1,11 +1,11 @@
 import { Sequelize } from "sequelize";
 import { env } from "@e-commerce/common/src/env.ts"
-import { userLogger } from "@e-commerce/common/src/logger.ts"
+import { dbLogger } from "@e-commerce/common/src/logger.ts"
 
 export const sequelize = new Sequelize(
-  env.DATABASE_NAME || "usersdb",
-  env.DATABASE_USER || "postgres",
-  env.DATABASE_PASSWORD || "postgres",
+  env.POSTGRES_DB || "usersdb",
+  env.POSTGRES_USER || "postgres",
+  env.POSTGRES_PASSWORD || "postgres",
   {
     host: process.env.DATABASE_HOST || "localhost",
     dialect: "postgres",
@@ -22,18 +22,18 @@ export const connectDB = async (retries = 5, delay = 2000) => {
   while (attempts < retries) {
     try {
       await sequelize.authenticate();
-      userLogger.info('Conectado com sucesso');
+      dbLogger.info('Conectado com sucesso');
       return;
     } catch (err) {
       const error = err as Error;
       attempts++;
-      userLogger.error(`Erro ao conectar (tentativa ${attempts}/${retries}): ${error.message}`);
+      dbLogger.error(`Erro ao conectar (tentativa ${attempts}/${retries}): ${error.message}`);
       if (attempts < retries) {
-        userLogger.info(`Tentando em ${delay / 1000} segundos...`);
+        dbLogger.info(`Tentando em ${delay / 1000} segundos...`);
         await new Promise(res => setTimeout(res, delay));
       } else {
         if (process.env.NODE_ENV !== 'production') {
-          userLogger.error(err);
+          dbLogger.error(err);
         }
         process.exit(1);
       }
@@ -44,8 +44,8 @@ export const connectDB = async (retries = 5, delay = 2000) => {
 export const syncDatabase = async () => {
   try {
     await sequelize.sync({ force: false });
-    userLogger.info("All tables created or already exist");
+    dbLogger.info("All tables created or already exist");
   } catch (err) {
-    userLogger.error(`Error syncing models: ${err}`);
+    dbLogger.error(`Error syncing models: ${err}`);
   }
 };
