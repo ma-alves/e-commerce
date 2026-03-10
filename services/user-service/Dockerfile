@@ -1,5 +1,5 @@
 # Build stage
-FROM node:20-alpine AS builder
+FROM node:23-alpine AS builder
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ RUN npm ci
 RUN npm run build -w @e-commerce/user-service || true
 
 # Production stage
-FROM node:20-alpine
+FROM node:23-alpine
 
 WORKDIR /app
 
@@ -31,14 +31,10 @@ COPY packages/common ./packages/common
 COPY services/user-service ./services/user-service
 
 # Install production dependencies only
-RUN npm ci --omit=dev
+RUN npm ci
 
 # Expose port
 EXPOSE 3000
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 
 # Start the service
 CMD ["npm", "start", "-w", "@e-commerce/user-service"]

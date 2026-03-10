@@ -6,6 +6,8 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    // "noEmit": true,
     // File Layout
     // "rootDir": "./src",
     // "outDir": "./dist",
