@@ -21,9 +21,12 @@
   "workspaces": [
     "packages/common",
     "services/user-service",
-    "services/order-service"
+    "services/order-service",
+    "services/api-gateway"
   ],
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/http-proxy": "^1.17.17",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
