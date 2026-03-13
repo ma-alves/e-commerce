@@ -2,7 +2,8 @@
   "files": [],
   "references": [
     { "path": "packages/common"},
-    { "path": "services/user-service"}
+    { "path": "services/user-service"},
+    { "path": "services/order-service"}
   ],
   "extends": "./tsconfig.base.json"
 }

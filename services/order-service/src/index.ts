@@ -13,9 +13,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet({ contentSecurityPolicy: false }));
 
-app.use("api/v1/orders", orderRouter);
+app.use("/api/v1/orders", orderRouter);
 
-app.get("api/v1", (req: Request, res: Response) => {
+app.get("/api/v1", (req: Request, res: Response) => {
   res.json({ message: "welcome to the order-service!" });
 });
 

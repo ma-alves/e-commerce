@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const createOrderSchema = z.object({
-  userId: z.uuid(),
+  userId: z.string().uuid(),
   totalAmount: z.number().positive(),
   description: z.string().min(2).max(255),
 });

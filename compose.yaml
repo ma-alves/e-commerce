@@ -57,6 +57,18 @@ services:
       - default
     env_file:
       - .env
+    develop:
+      watch:
+        - action: sync
+          path: ./services/user-service
+          target: /app/services/user-service
+        - action: sync
+          path: ./packages/common
+          target: /app/packages/common
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./tsconfig.json
 
   order-service:
     build:
@@ -80,6 +92,18 @@ services:
       - default
     env_file:
       - .env
+    develop:
+      watch:
+        - action: sync
+          path: ./services/order-service
+          target: /app/services/order-service
+        - action: sync
+          path: ./packages/common
+          target: /app/packages/common
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./tsconfig.json
 
 volumes:
   postgres_data:
