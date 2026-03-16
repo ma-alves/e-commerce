@@ -35,7 +35,7 @@ export const refreshToken = async (req: Request, res: Response): Promise<void> =
 export const me = async (req: Request, res: Response): Promise<void> => {
   try {
     // req.user já foi populado pelo middleware authenticated, só retorna
-    const { password: _, ...userWithoutPassword } = req.user!.toJSON();
+    const { password: _, ...userWithoutPassword } = req.user!;
     res.status(200).json(userWithoutPassword);
   } catch (error) {
     res.status(500).json({ message: getErrorMessage(error) });

@@ -3,11 +3,12 @@ import type { Request, Response } from "express";
 import helmet from "helmet";
 import orderRouter from "./routes/order.route.ts";
 import { connectDB, syncDatabase } from "@e-commerce/common/src/db.ts";
-import { orderLogger } from "@e-commerce/common/src/logger.ts"
+import { createLogger } from "@e-commerce/common/src/logger.ts"
 import { env } from "@e-commerce/common/src/env.ts"
 
 const app = express();
 const port = env.ORDER_SERVICE_PORT;
+const logger = createLogger("[order-service]");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,5 +24,5 @@ await connectDB();
 await syncDatabase();
 
 app.listen(port, async () => {
-  orderLogger.info(`The order-service is running at http://localhost:${port}`);
+  logger.info(`The order-service is running at http://localhost:${port}`);
 });

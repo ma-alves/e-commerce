@@ -1,53 +1,32 @@
 import express, { Express, Request, Response, NextFunction } from "express";
-import httpProxy from "http-proxy";
 import cors from "cors";
-import { env } from "@e-commerce/common/src/env.ts"
-import { gatewayLogger } from "@e-commerce/common/src/logger.ts"
+import { env } from "@e-commerce/common/src/env.ts";
+import { createLogger } from "@e-commerce/common/src/logger.ts";
+import { router } from "./routes/index.ts";
 
 const app: Express = express();
 const port = env.API_GATEWAY_PORT;
-const apiProxy = httpProxy.createProxyServer();
+const logger = createLogger("[api-gateway]");
 
 app.use(cors());
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-// /api/v1/orders
-app.all("/orders/*", (req: Request, res: Response, next: NextFunction) => {
-    req.url = req.url.replace('/orders', '/api/v1/orders');
-    apiProxy.web(req, res, { target: `http://localhost:${env.ORDER_SERVICE_PORT}` }, (e) => {
-        if (e) {
-            gatewayLogger.error(e);
-            next(e);
-        }
-    });
+app.use("/", router);
+
+// 404 handler
+app.use((req: Request, res: Response) => {
+  res.status(404).json({ message: "Route not found" });
 });
 
-// /api/v1/users
-app.all("/users/*", (req: Request, res: Response, next: NextFunction) => {
-    req.url = req.url.replace('/users', '/api/v1/users');
-    apiProxy.web(req, res, { target: `http://localhost:${env.USER_SERVICE_PORT}` }, (error: any) => {
-        if (error) {
-            gatewayLogger.error(error);
-            next(error);
-        }
-    });
-});
-
-// /api/v1/auth
-app.all("/auth/*", (req: Request, res: Response, next: NextFunction) => {
-    req.url = req.url.replace('/auth', '/api/v1/auth');
-    apiProxy.web(req, res, { target: `http://localhost:${env.USER_SERVICE_PORT}` }, (error: any) => {
-        if (error) {
-            gatewayLogger.error(error);
-            next(error);
-        }
-    });
-});
-
-app.use(function(err: any, req: Request, res: Response, next: NextFunction) {
-  gatewayLogger.error(err.stack); 
-  res.status(500).send('Something broke!'); 
+// Global error handler
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  logger.error(err.stack);
+  res.status(500).json({ message: "Internal server error" });
 });
 
 app.listen(port, () => {
-    gatewayLogger.info(`API Gateway is running at http://localhost:${port}`);
+  logger.info(`API Gateway is running at http://localhost:${port}`);
 });
+
+export default app;

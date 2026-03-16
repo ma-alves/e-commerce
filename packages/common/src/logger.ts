@@ -1,19 +1,16 @@
-import pino from "pino";
-import type { Logger } from "pino";
+import pino from "pino"
+import type { Logger } from "pino"
 
-// considerar usar pretty-pino
-const logger: Logger = pino({
-  transport: {
-    target: "pino-pretty",
-    options: {
-      colorize: true,
-      translateTime: "SYS:standard",
+export const createLogger = (name: string): Logger => {
+  return pino({
+    name: name,
+    transport: {
+      target: "pino-pretty",
+      options: {
+        colorize: true,
+        translateTime: "SYS:standard",
+      },
     },
-  },
-  level: 'debug'
-})
-
-export const userLogger = logger.child({ module: 'user-service' })
-export const orderLogger = logger.child({ module: 'order-service' })
-export const dbLogger = logger.child({ module: 'database' })
-export const gatewayLogger = logger.child({ module: 'api-gateway' })
+    level: 'debug'
+  })
+}

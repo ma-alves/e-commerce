@@ -1,5 +1,3 @@
-// repetições de erro
-
 import type { Request, Response } from "express";
 import { UserService } from "../services/user.service.ts";
 import { getErrorMessage } from "@e-commerce/common/src/http-error.ts";
