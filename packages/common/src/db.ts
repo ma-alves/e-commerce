@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize";
 import { env } from "@e-commerce/common/src/env.ts"
-import { dbLogger } from "@e-commerce/common/src/logger.ts"
+import { createLogger } from "@e-commerce/common/src/logger.ts"
+
+const dbLogger = createLogger("[database]")
 
 export const sequelize = new Sequelize(
   env.POSTGRES_DB || "usersdb",

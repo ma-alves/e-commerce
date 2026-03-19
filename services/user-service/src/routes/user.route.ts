@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authenticated, authorized } from "../middlewares/auth.middleware.ts";
+import { authorized } from "../middlewares/auth.middleware.ts";
 import { validateData } from "../middlewares/validation.middleware.ts";
 import { updateUserSchema } from "../validation/schemas.ts";
 import {
@@ -11,9 +11,9 @@ import {
 
 const userRouter = Router();
 
-userRouter.get("/", authenticated, authorized("Admin"), getUsersController);
-userRouter.get("/:uuid", authenticated, getUserByIdController);
-userRouter.put("/:uuid/update", authenticated, validateData(updateUserSchema), updateUserController);
-userRouter.delete("/:uuid/delete", authenticated, authorized("Admin"), deleteUserController);
+userRouter.get("/", authorized("Admin"), getUsersController);
+userRouter.get("/:uuid", getUserByIdController);
+userRouter.put("/:uuid/update", validateData(updateUserSchema), updateUserController);
+userRouter.delete("/:uuid/delete", authorized("Admin"), deleteUserController);
 
 export default userRouter
